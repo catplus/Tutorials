@@ -1,0 +1,1271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ca" xml:lang="ca">
+<head>
+<!-- 2016-02-09 dt 00:01 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tutorial: Com es va crear el DOSSIER+ ?</title>
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Secció de de l'Assoc. cat+" />
+<meta  name="description" content="Una classe pràctica de LaTeX integrat amb ImageMagick"
+ />
+<meta  name="keywords" content="LaTeX ImageMagick Bash Ruby pdftk pdfnup dossier" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="org.css"/>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Tutorial: Com es va crear el DOSSIER+ ?</h1>
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1"><span class="section-number-2">1</span> Detall del procediment de composició editorial del DOSSIER+ de l'entitat Associació pel programari lliure de Catalunya, Catplus.</h2>
+<div class="outline-text-2" id="text-1">
+
+<div class="figure">
+<p><img src="catplus-print.jpg" alt="catplus-print.jpg" width="640px" />
+</p>
+</div>
+
+<p>
+Tutorial de maquetació en línea de comandaments, del DOSSIER+: De l'edició semàntica en <code>\LaTeX</code>, i l'ús d'<code>ImageMagick</code> per a les imatges, fins a la preparació final dels dossiers en <code>pdftk</code>.
+</p>
+
+<div id="table-of-contents">
+<h2>&Iacute;ndex</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">1. Detall del procediment de composició editorial del DOSSIER+ de l'entitat Associació pel programari lliure de Catalunya, Catplus.</a>
+<ul>
+<li><a href="#orgheadline2">1.1. L'entitat ''Associació pel programari lliure de Catalunya, CATPLUS``</a></li>
+<li><a href="#orgheadline3">1.2. Motivacions</a></li>
+<li><a href="#orgheadline4">1.3. Justificació del projecte documental</a></li>
+<li><a href="#orgheadline5">1.4. Objectius i reptes dels arxius proposats</a>
+<ul>
+<li><a href="#orgheadline6">1.4.1. DOSSIER+A3.pdf</a></li>
+<li><a href="#orgheadline7">1.4.2. DOSSIER+.pdf</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline8">1.5. Continguts textuals</a></li>
+<li><a href="#orgheadline9">1.6. Continguts gràfics</a>
+<ul>
+<li><a href="#orgheadline10">1.6.1. Logotips</a></li>
+<li><a href="#orgheadline11">1.6.2. Fotografies</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline12">1.7. Tecnologies emprades per a la confecció del DOSSIER+</a></li>
+<li><a href="#orgheadline13">1.8. Procediment inicial d'elaboració de les 4 pàgines principal en LaTeX</a></li>
+<li><a href="#orgheadline14">1.9. Característiques genèriques dels documents en del DOSSIER+</a>
+<ul>
+<li><a href="#orgheadline15">1.9.1. El marge esquerra</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline16">1.10. portada.tex La portada, un cas singular</a></li>
+<li><a href="#orgheadline17">1.11. quisom.pdf Exemples d'una bona organització de macros</a></li>
+<li><a href="#orgheadline18">1.12. proposta.tex Detalls característics de la pàgina de proposta</a>
+<ul>
+<li><a href="#orgheadline19">1.12.1. L'entorn tcolorbox</a></li>
+<li><a href="#orgheadline20">1.12.2. La taula orientativa de despeses</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline21">1.13. graphics.tex El colofò gràfic d'imatges tipus polaroid</a></li>
+<li><a href="#orgheadline22">1.14. Procediment d'obtenció d'imatges</a>
+<ul>
+<li><a href="#orgheadline23">1.14.1. Conversió de PDF a PNG</a></li>
+<li><a href="#orgheadline24">1.14.2. Arxius resultants</a></li>
+<li><a href="#orgheadline25">1.14.3. Conversió de les imatges .jpg i .png</a></li>
+<li><a href="#orgheadline26">1.14.4. Un cop hem generat aquests arxius polaroid&#x2026;</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline27">1.15. Generació d'un mosaic (<code>montage.png</code>)</a></li>
+<li><a href="#orgheadline28">1.16. Consideracions al pes de l'arxiu montage.png</a>
+<ul>
+<li><a href="#orgheadline29">1.16.1. L'eina d'optimització de png's pngquant</a></li>
+<li><a href="#orgheadline30">1.16.2. Com funciona;</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline31">1.17. Re-generació de la contraportada a baix pes</a></li>
+<li><a href="#orgheadline32">1.18. Compilació final dels quatre arxius + 1, resultants;</a></li>
+<li><a href="#orgheadline33">1.19. Creació de shell scripts per al directori DOSSIER</a>
+<ul>
+<li><a href="#orgheadline34">1.19.1. DOSSIER+A3.pdf</a></li>
+<li><a href="#orgheadline35">1.19.2. DOSSIER+.pdf</a></li>
+<li><a href="#orgheadline36">1.19.3. dossier.sh per generar PDF per ENVIAMENT PER CORREU</a></li>
+<li><a href="#orgheadline37">1.19.4. copisteria.sh per generar PDF per IMPRESSIÓ EN COPISTERIA</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline38">1.20. Generació final de l'arxiu DOSSIER+A3.pdf per copisteria</a>
+<ul>
+<li><a href="#orgheadline39">1.20.1. muntatge.sh: Shell script final per DOSSIER+A3.pdf</a></li>
+<li><a href="#orgheadline40">1.20.2. Continguts finals de la carpeta DOSSIER a copiar a USB o enviar:</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline41">1.21. Impressió digital del DOSSIER+A3.pdf</a></li>
+<li><a href="#orgheadline42">1.22. Us i finalitats</a></li>
+<li><a href="#orgheadline43">1.23. Model de carta d'enviament</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="orgheadline2"><span class="section-number-3">1.1</span> L'entitat ''Associació pel programari lliure de Catalunya, CATPLUS``</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+El passat 12 de novembre, la nostre entitat Associació pel programari
+lliure de Catalunya, CATPLUS, era oficialment inscrita al registre
+d'entitats de la Generalitat, amb els estatuts aprovats i publicats.
+Poques setmanes després, vam celebrar la primera junta ordinària, posant
+en funcionament la maquinària de l'associació, amb l'objectiu d'assolir
+les fites proposades; «Article 2. Els fins de l'associació són: Promoure
+l'ús i difusió de programari lliure, en qualsevol de les seves
+plataformes.» I per fer-ho possible, l'associació cat+ es proposa
+realitzar les activitats següents (art.2 cont.): Divulgació; Realització
+de jornades, xerrades i tallers i, Formació; Realització de cursets,
+material didàctic i convenis formatius.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3"><span class="section-number-3">1.2</span> Motivacions</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Treballar per la divulgació del programari lliure i dels valors que ens
+aporta de llibertat, equitat i lluita contra la fractura social i
+digital. Estem parlant d'innovació oberta, de TIC's pensades també per a
+la integració social i l'assoliment d'oportunitats per a persones,
+entitats, empreses i administracions. A Europa el programari lliure ja
+és gairebé una qüestió d'ètica en moltes administracions.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4"><span class="section-number-3">1.3</span> Justificació del projecte documental</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+En aquestes darreres setmanes de l'any, hem posat en funcionament les
+eines que ho faran possible; La nostre pàgina web www.catplus.cat, el
+nostre correu info@catplus.cat, els comptes de www.twitter.com/acatplus,
+Facebook, Google+, la redacció de les primeres propostes d'activitats,
+l'establiment de les primeres rondes de conversacions&#x2026;
+</p>
+
+<p>
+Tanmateix, faltava un document PDF adjuntable i descarregable per
+mitjans electrònics, alhora que imprimible en copisteria digital per
+entregar en suport paper imprès, com un A3 apaïsat i doblegat.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5"><span class="section-number-3">1.4</span> Objectius i reptes dels arxius proposats</h3>
+<div class="outline-text-3" id="text-1-4">
+</div><div id="outline-container-orgheadline6" class="outline-4">
+<h4 id="orgheadline6"><span class="section-number-4">1.4.1</span> DOSSIER+A3.pdf</h4>
+<div class="outline-text-4" id="text-1-4-1">
+<p>
+Dossier A3 LANDSCAPE amb ordre 4,1,2,3 per impressió en copisteria
+digital Repte: Aconseguir un A3 degudament ordenat (#4,1,2,3), apaïsat,
+en mida final A3 i molt important; Respectant els màrgens originals del
+A4, al A3 final.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline7" class="outline-4">
+<h4 id="orgheadline7"><span class="section-number-4">1.4.2</span> DOSSIER+.pdf</h4>
+<div class="outline-text-4" id="text-1-4-2">
+<p>
+Dossier A4 de 4 pàgines per ENVIAR ADJUNT en correu electrònic o per
+descarregar Repte: Aconseguir un A3 de baix pes en Kb, via millor
+compressió de les imatges .png
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline8" class="outline-3">
+<h3 id="orgheadline8"><span class="section-number-3">1.5</span> Continguts textuals</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+Els principals continguts textuals del document son copia literal d'allò
+redactat i publicat al seu dia, a l'antiga pàgina web
+<a href="http://web.catplus.cat/">http://web.catplus.cat/</a> situada al cloud de Red Hat (Rhcloud Openshift).
+</p>
+
+<p>
+Alhora, s'ha ampliat el contingut publicat a la web, amb el detall d'una
+proposta d'activitat tipus, de les bàsiques que figuren al nostre
+document de propostes (ANNEX actes.pdf).
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline9" class="outline-3">
+<h3 id="orgheadline9"><span class="section-number-3">1.6</span> Continguts gràfics</h3>
+<div class="outline-text-3" id="text-1-6">
+</div><div id="outline-container-orgheadline10" class="outline-4">
+<h4 id="orgheadline10"><span class="section-number-4">1.6.1</span> Logotips</h4>
+<div class="outline-text-4" id="text-1-6-1">
+<p>
+L'habitual logotip de catplus, alhora que figurant en forma estès a
+contraportada.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline11" class="outline-4">
+<h4 id="orgheadline11"><span class="section-number-4">1.6.2</span> Fotografies</h4>
+<div class="outline-text-4" id="text-1-6-2">
+<p>
+S'han incorporat també, imatges d'activitats realitzades per membres de
+Catplus, malgrat que en altres contexts associatius germans, així com
+infografies relatives al PL.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline12" class="outline-3">
+<h3 id="orgheadline12"><span class="section-number-3">1.7</span> Tecnologies emprades per a la confecció del DOSSIER+</h3>
+<div class="outline-text-3" id="text-1-7">
+<pre class="example">
+LaTeX
+Imagemagick Convert
+            Mosaic
+            Montage
+Ruby        require "RMagick"
+Bash
+pdftk
+pdfnup
+pngquant
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline13" class="outline-3">
+<h3 id="orgheadline13"><span class="section-number-3">1.8</span> Procediment inicial d'elaboració de les 4 pàgines principal en LaTeX</h3>
+<div class="outline-text-3" id="text-1-8">
+<p>
+El document .tex original en LaTeX, es va confeccionar per a la
+realització del dossier informatiu de la ULlE (Universitat Lliure de
+l'Empordà).
+</p>
+
+<p>
+Els 4 documents que junts, conformaran el DOSSIER+ son:
+</p>
+
+<pre class="example">
+portada.tex
+quisom.tex
+proposta.tex
+graphics.tex
+</pre>
+
+<p>
+Aquests 4 documents conformaran un cop compilats amb
+</p>
+
+<p>
+$pdflatex
+</p>
+
+<pre class="example">
+portada.pdf
+quisom.pdf
+proposta.pdf
+graphics.pdf
+</pre>
+
+<p>
+Alhora hi ha un 5è document ANNEX que recull la TIPOLOGIA d'actes
+possibles, en l'arxiu:
+</p>
+
+<pre class="example">
+actes.pdf
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline14" class="outline-3">
+<h3 id="orgheadline14"><span class="section-number-3">1.9</span> Característiques genèriques dels documents en del DOSSIER+</h3>
+<div class="outline-text-3" id="text-1-9">
+<p>
+La plantilla original conté notable complexitat, degut a que fa ús de la
+classe memoir, alhora que incorpora comandaments en el llenguatge gràfic
+Tikz, per als elements gràfics i de separació d'aquest peculiar
+document.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-latex"><span style="color: #a020f0;">\documentclass</span>[<span style="color: #a0522d;">a4paper,11pt,final</span>]{<span style="color: #0000ff;">memoir</span>}
+
+<span style="color: #a020f0;">\renewcommand</span>{<span style="color: #0000ff;">\familydefault</span>}{<span style="color: #0000ff;">bch</span>}  <span style="color: #b22222;">% font</span>
+<span style="color: #a020f0;">\pagestyle</span>{<span style="color: #0000ff;">empty</span>}                   <span style="color: #b22222;">% no pagenumbering</span>
+<span style="color: #a020f0;">\setlength</span>{<span style="color: #a0522d;">\parindent</span>}{<span style="color: #a0522d;">0pt</span>}         <span style="color: #b22222;">% no paragraph indentation</span>
+
+La font es dota d'un cos m&#233;s solid. No hi han nombres de p&#224;gina ni identacions.
+
+### Paquets invocats
+
+<span style="color: #a020f0;">\usepackage</span>{<span style="color: #0000ff;">flowfram</span>}                                       <span style="color: #b22222;">% column layout</span>
+<span style="color: #a020f0;">\usepackage</span>[<span style="color: #a0522d;">margin=54pt,right=1.34cm,bottom=1.54cm</span>]{<span style="color: #0000ff;">geometry</span>}<span style="color: #b22222;">% margins</span>
+<span style="color: #a020f0;">\usepackage</span>[<span style="color: #a0522d;">utf8x</span>]{<span style="color: #0000ff;">inputenc</span>}
+<span style="color: #a020f0;">\usepackage</span>{<span style="color: #0000ff;">graphicx</span>}                                       <span style="color: #b22222;">% figures</span>
+<span style="color: #a020f0;">\usepackage</span>{<span style="color: #0000ff;">url</span>}                                            <span style="color: #b22222;">% URLs</span>
+<span style="color: #a020f0;">\usepackage</span>[<span style="color: #a0522d;">usenames,dvipsnames</span>]{<span style="color: #0000ff;">xcolor</span>}                    <span style="color: #b22222;">% color</span>
+<span style="color: #a020f0;">\usepackage</span>{<span style="color: #0000ff;">multicol</span>}                                       <span style="color: #b22222;">% columns env.</span>
+    <span style="color: #a020f0;">\setlength</span>{<span style="color: #a0522d;">\multicolsep</span>}{<span style="color: #a0522d;">0pt</span>}
+<span style="color: #a020f0;">\usepackage</span>{<span style="color: #0000ff;">paralist</span>}                                       <span style="color: #b22222;">% compact lists</span>
+<span style="color: #a020f0;">\usepackage</span>{<span style="color: #0000ff;">tikz</span>}
+
+### Macros definides
+
+Model d'exemple (una per cada tipologia de paragraf):
+
+<span style="color: #a020f0;">\newenvironment</span>{<span style="color: #0000ff;">quisom</span>}
+    {<span style="color: #0000ff;">\ignorespaces</span><span style="color: #0000ff;">\textbf</span><span style="color: #0000ff;">{</span><span style="color: #0000ff; font-weight: bold;">\color</span><span style="color: #0000ff; font-weight: bold;">{Maroon} Qui som?</span><span style="color: #0000ff;">}</span>}
+    {<span style="color: #0000ff;">\SmallSep\ignorespacesafterend</span>}
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline15" class="outline-4">
+<h4 id="orgheadline15"><span class="section-number-4">1.9.1</span> El marge esquerra</h4>
+<div class="outline-text-4" id="text-1-9-1">
+<p>
+L'automatització certament ostensible en la filosofia , precisa
+tanmateix, la consolidació d'una imatge gràfica "corporativa" COHERENT
+dins els documents i entre ells.
+</p>
+
+<p>
+En aquest cas el repte principal fou la consolidació del marge esquerra
+'catplus'
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-latex"><span style="color: #b22222;">% </span><span style="color: #b22222;">Left frame</span>
+<span style="color: #b22222;">%%%%%%%%%%%%%%%%%%%%</span>
+<span style="color: #a020f0;">\begin</span>{<span style="color: #0000ff;">figure</span>}
+    <span style="color: #696969;">\hfill</span>
+    <span style="color: #696969;">\includegraphics</span>[width=1.1<span style="color: #696969;">\columnwidth</span>]{logosol.jpg}
+    <span style="color: #a020f0;">\vspace</span>{<span style="color: #0000ff;">-6cm</span>}
+<span style="color: #a020f0;">\end</span>{<span style="color: #0000ff;">figure</span>}
+
+<span style="color: #a020f0;">\begin</span>{<span style="color: #0000ff;">flushright</span>}<span style="color: #228b22;">\large</span>
+        <span style="color: #228b22;">\sffamily</span>
+    <span style="color: #a020f0;">\textsc</span>{<span style="color: #556b2f; font-weight: bold;">\bfseries</span><span style="color: #556b2f; font-weight: bold;">{CATPLUS Associaci&#243; catalana pel programari lliure}</span>} <span style="color: #ff0000; font-weight: bold;">\\</span>
+    <span style="color: #a020f0;">\vspace</span>{<span style="color: #0000ff;">1em</span>}
+    <span style="color: #228b22;">\small</span>{info@catplus.cat}<span style="color: #ff0000; font-weight: bold;">\\</span>
+    <span style="color: #a020f0;">\vspace</span>{<span style="color: #0000ff;">.5em</span>}
+    <span style="color: #228b22;">\small</span>
+    <span style="color: #a020f0;">\textbf</span>{<span style="color: #556b2f; font-weight: bold;">www.catplus.cat</span>}<span style="color: #ff0000; font-weight: bold;">\\</span>
+    <span style="color: #a020f0;">\vspace</span>{<span style="color: #0000ff;">1em</span>}
+    <span style="color: #a020f0;">\vspace</span>{<span style="color: #0000ff;">.5em</span>}
+
+
+    <span style="color: #228b22;">\scriptsize</span>{c/. Barcelona, 59 1-1<span style="color: #ff0000; font-weight: bold;">\\</span>
+    <span style="color: #a020f0;">\vspace</span>{<span style="color: #0000ff;">.5em</span>}
+17002 GIRONA<span style="color: #ff0000; font-weight: bold;">\\</span>
+    <span style="color: #a020f0;">\vspace</span>{<span style="color: #0000ff;">.5em</span>}
+    NIF G-55250740}
+<span style="color: #a020f0;">\end</span>{<span style="color: #0000ff;">flushright</span>}<span style="color: #228b22;">\normalsize</span>
+<span style="color: #696969;">\framebreak</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline16" class="outline-3">
+<h3 id="orgheadline16"><span class="section-number-3">1.10</span> portada.tex La portada, un cas singular</h3>
+<div class="outline-text-3" id="text-1-10">
+<p>
+La portada del DOSSIER+, mostra elements en rotació vertical.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-latex"><span style="color: #696969;">\rotatebox</span>{90}{
+        <span style="color: #228b22;">\sffamily</span>
+    <span style="color: #696969;">\scalebox</span>{2}{<span style="color: #a020f0;">\begin</span>{<span style="color: #0000ff;">minipage</span>}{.6<span style="color: #696969;">\textwidth</span>}
+<span style="color: #a020f0;">\begin</span>{<span style="color: #0000ff;">flushright</span>}
+<span style="color: #696969;">\scalebox</span>{1}{<span style="color: #a020f0;">\Huge</span><span style="color: #556b2f; font-weight: bold;">\bfseries</span><span style="color: #228b22;"> {</span><span style="color: #228b22;">\color</span><span style="color: #228b22;">{Black}</span><span style="color: #a020f0;">\textsc</span><span style="color: #228b22;">{</span><span style="color: #556b2f; font-weight: bold;">Associaci&#243; catalana</span><span style="color: #228b22;">}}</span>} <span style="color: #ff0000; font-weight: bold;">\\</span>
+<span style="color: #696969;">\SmallSep</span>
+<span style="color: #696969;">\scalebox</span>{1.}{<span style="color: #a020f0;">\Huge</span><span style="color: #556b2f; font-weight: bold;">\bfseries</span><span style="color: #228b22;">{</span><span style="color: #228b22;">\color</span><span style="color: #228b22;">{Maroon}</span><span style="color: #a020f0;">\textsc</span><span style="color: #228b22;">{</span><span style="color: #556b2f; font-weight: bold;">pel programari lliure</span><span style="color: #228b22;">}}</span>} <span style="color: #ff0000; font-weight: bold;">\\</span>
+<span style="color: #696969;">\SmallSep</span>
+<span style="color: #a020f0;">\vspace</span>{<span style="color: #0000ff;">3em</span>}
+<span style="color: #b22222;">%</span><span style="color: #b22222;">\bigskip</span>
+<span style="color: #a020f0;">\end</span>{<span style="color: #0000ff;">flushright</span>}
+<span style="color: #a020f0;">\end</span>{<span style="color: #0000ff;">minipage</span>}}
+}
+<span style="color: #a020f0;">\vspace</span>{<span style="color: #0000ff;">-5em</span>}
+<span style="color: #a020f0;">\hspace</span>{<span style="color: #0000ff;">-10em</span>}
+<span style="color: #a020f0;">\begin</span>{<span style="color: #0000ff;">minipage</span>}{.7<span style="color: #696969;">\textwidth</span>}
+<span style="color: #696969;">\quote</span>
+<span style="color: #696969;">\quote</span>
+<span style="color: #696969;">\quote</span>
+<span style="color: #696969;">\textcolor</span>{Gray}{<span style="color: #696969;">\HUGE</span><span style="color: #556b2f; font-weight: bold;">\bfseries</span>{<span style="color: #696969;">\scalebox</span>{1.58}{DOSSIER}}}<span style="color: #ff0000; font-weight: bold;">\\</span>
+<span style="color: #696969;">\textcolor</span>{Gray}{<span style="color: #696969;">\HUGE</span><span style="color: #556b2f; font-weight: bold;">\bfseries</span>{<span style="color: #a020f0;">\emph</span>{<span style="color: #556b2f; font-style: italic;">\scalebox</span><span style="color: #556b2f; font-style: italic;">{.79}{proposta executiva}</span>}}}
+<span style="color: #696969;">\bigskip</span>
+
+<span style="color: #228b22;">\large</span><span style="color: #a020f0;">\textsc</span>{<span style="color: #556b2f; font-weight: bold;">Proposta de col&#183;laboraci&#243; entre l'Excm. Ajuntament i l'entitat Associaci&#243; Catalana pel Programari Lliure, referent a la proposta d'organitzaci&#243; d'una activitat divulgativa i formativa sobre Programari Lliure i amb finalitat social, tecnol&#242;gica i laboral.</span>}
+<span style="color: #a020f0;">\end</span>{<span style="color: #0000ff;">minipage</span>}
+<span style="color: #696969;">\vfill</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline17" class="outline-3">
+<h3 id="orgheadline17"><span class="section-number-3">1.11</span> quisom.pdf Exemples d'una bona organització de macros</h3>
+<div class="outline-text-3" id="text-1-11">
+<p>
+Utilitzarem ara <code>\begin{multicols}{2}</code> per a treballar amb dues
+columnes.
+</p>
+
+<p>
+Les macros definides abans del contenen les definicions
+d'entorns per a cada paràgraf. D'aquesta manera s'ha creat un nou tipus
+d'entorn per a cada paràgraf, pensant ja en la posterior usabilitat del
+dossier.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-latex">### Definici&#243; de macro
+<span style="color: #a020f0;">\newenvironment</span>{<span style="color: #0000ff;">quisom</span>}
+    {<span style="color: #0000ff;">\ignorespaces</span><span style="color: #0000ff;">\textbf</span><span style="color: #0000ff;">{</span><span style="color: #0000ff; font-weight: bold;">\color</span><span style="color: #0000ff; font-weight: bold;">{Maroon}</span><span style="color: #0000ff; font-weight: bold;">\textsc</span><span style="color: #0000ff; font-weight: bold;">{Qui som?}</span><span style="color: #0000ff;">}</span>}
+    {<span style="color: #0000ff;">\SmallSep\ignorespacesafterend</span>}
+
+### Invocaci&#243; de l'entorn de la macro
+
+<span style="color: #a020f0;">\begin</span>{<span style="color: #0000ff;">quisom</span>}
+<span style="color: #a020f0;">\emph</span>{<span style="color: #556b2f; font-style: italic;">Som un grup multi-disciplinar de persones amb vocaci&#243; per a la divulgaci&#243; i difusi&#243; del programari lliure i llurs objectius socials, tecnol&#242;gics i laborals.</span>} La nostre junta directiva i fundacional, est&#224; integrada per divulgadors t&#232;cnics inform&#224;tics, amb s&#242;lids coneixements d'administraci&#243; i programaci&#243; de sistemes GNU/Linux i evidentment, dels principis rectors del programari lliure, aix&#237; com de l'anomenada filosofia UNIX i els seus <span style="color: #a020f0;">\emph</span>{<span style="color: #556b2f; font-style: italic;">tenets</span>}.
+<span style="color: #b22222;">%</span><span style="color: #b22222;">\center</span><span style="color: #b22222;"> </span><span style="color: #b22222;">\includegraphics</span><span style="color: #b22222;">[scale=.13]{webulle.jpg}</span>
+<span style="color: #a020f0;">\end</span>{<span style="color: #0000ff;">quisom</span>}
+<span style="color: #696969;">\SmallSep</span>
+</pre>
+</div>
+
+<p>
+Com veiem podríem incorporar petites il·lustracions a cada paràgraf,
+respectant la columna. Alhora el <code>\SmallSep</code> ens dona la justa separació
+entre paràgrafs.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline18" class="outline-3">
+<h3 id="orgheadline18"><span class="section-number-3">1.12</span> proposta.tex Detalls característics de la pàgina de proposta</h3>
+<div class="outline-text-3" id="text-1-12">
+<p>
+d'activitats
+</p>
+</div>
+
+<div id="outline-container-orgheadline19" class="outline-4">
+<h4 id="orgheadline19"><span class="section-number-4">1.12.1</span> L'entorn tcolorbox</h4>
+<div class="outline-text-4" id="text-1-12-1">
+<p>
+Característic del requadre curvilini i sombrejat a modus de fitxa:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-latex"><span style="color: #a020f0;">\begin</span>{<span style="color: #0000ff;">tcolorbox</span>}[colback=Maroon!10,colframe=Maroon!80!black]
+<span style="color: #a020f0;">\begin</span>{<span style="color: #0000ff;">enumerate</span>}
+    <span style="color: #a020f0;">\item</span> <span style="color: #a020f0;">\textbf</span>{<span style="color: #556b2f; font-weight: bold;">T&#205;TOL:</span><span style="color: #00ff00; font-weight: bold;">``LLARGA VIDA AL TEU ORDINADOR''</span>}
+    <span style="color: #a020f0;">\item</span> <span style="color: #a020f0;">\textbf</span>{<span style="color: #556b2f; font-weight: bold;">Durada:</span>} 1/2 dia (4 hores)
+    <span style="color: #a020f0;">\item</span> <span style="color: #a020f0;">\textbf</span>{<span style="color: #556b2f; font-weight: bold;">P&#250;blic destinatari:</span>} Persones, grups i entitats interessades en recuperar ordinadors, descobrir el programari lliure i els seus principis i el sistema operatiu Gnu/Linux
+    <span style="color: #a020f0;">\item</span> <span style="color: #a020f0;">\textbf</span>{<span style="color: #556b2f; font-weight: bold;">Metodologia:</span>} Introducci&#243; conceptual, fonaments te&#242;rics i taller pr&#224;ctic sobre les m&#224;quines que els assistents duguin a l'acte o sobre el material did&#224;ctic de les exposicions.
+    <span style="color: #a020f0;">\item</span> <span style="color: #a020f0;">\textbf</span>{<span style="color: #556b2f; font-weight: bold;">Estructuraci&#243;:</span>} 0. Presentaci&#243; de l'acte/s. Introducci&#243; te&#242;rica al programari lliure i als sistemes Gnu/Linux. Reflexi&#243; sobre els requeriments de maquinari en funci&#243; del programari (lliure). Descripci&#243; de casos pr&#224;ctics i exemples i proposta metodol&#242;gica (c&#242;pies de seguretat, instal&#183;laci&#243; S.O. i configuraci&#243;) per a l'extensi&#243; del cicle de durada d'un ordinador. Taula rodona sobre q&#252;estions &#232;tiques del consumisme i el programari lliure i resoluci&#243; de dubtes en q&#252;estions pr&#224;ctiques. Proposta d'ampliaci&#243; d'informaci&#243;, formaci&#243; i coneixements.
+<span style="color: #a020f0;">\end</span>{<span style="color: #0000ff;">enumerate</span>}
+<span style="color: #a020f0;">\end</span>{<span style="color: #0000ff;">tcolorbox</span>}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline20" class="outline-4">
+<h4 id="orgheadline20"><span class="section-number-4">1.12.2</span> La taula orientativa de despeses</h4>
+<div class="outline-text-4" id="text-1-12-2">
+<div class="org-src-container">
+
+<pre class="src src-latex"><span style="color: #a020f0;">\begin</span>{<span style="color: #0000ff;">table</span>}[h]
+<span style="color: #a020f0;">\centering</span>
+<span style="color: #228b22;">\footnotesize</span><span style="color: #a020f0;">\addtolength</span>{<span style="color: #a0522d;">\tabcolsep</span>}{<span style="color: #a0522d;">15pt</span>}
+<span style="color: #a020f0;">\caption</span>{<span style="color: #228b22;">\footnotesize</span><span style="color: #228b22;"> Taula de previsi&#243; de despeses per l'acte</span>}
+<span style="color: #a020f0;">\label</span>{<span style="color: #008b8b;">my-label</span>}
+<span style="color: #a020f0;">\begin</span>{<span style="color: #0000ff;">tabular</span>}{llr}
+<span style="color: #696969;">\hline</span>
+<span style="color: #696969;">\multicolumn</span>{2}{c}{<span style="color: #a020f0;">\textbf</span>{<span style="color: #556b2f; font-weight: bold;">PREVISI&#211; DE DESPESES per ACTIVITAT</span>}} <span style="color: #ff0000; font-weight: bold;">&amp;</span>             <span style="color: #ff0000; font-weight: bold;">\\</span> <span style="color: #696969;">\cline</span>{1-2}
+Tipus               <span style="color: #ff0000; font-weight: bold;">&amp;</span> Concepte           <span style="color: #ff0000; font-weight: bold;">&amp;</span> Preu (<span style="color: #696969;">\euro</span>) <span style="color: #ff0000; font-weight: bold;">\\</span> <span style="color: #696969;">\hline</span>
+Divulgaci&#243;          <span style="color: #ff0000; font-weight: bold;">&amp;</span> Edici&#243; material   <span style="color: #ff0000; font-weight: bold;">&amp;</span> 40.00       <span style="color: #ff0000; font-weight: bold;">\\</span>
+Divulgaci&#243;          <span style="color: #ff0000; font-weight: bold;">&amp;</span> Impressi&#243; material   <span style="color: #ff0000; font-weight: bold;">&amp;</span> 10.00       <span style="color: #ff0000; font-weight: bold;">\\</span>
+Organitzaci&#243;        <span style="color: #ff0000; font-weight: bold;">&amp;</span> Dietes i despla&#231;aments <span style="color: #ff0000; font-weight: bold;">&amp;</span> 54.00        <span style="color: #ff0000; font-weight: bold;">\\</span>
+Organitzaci&#243;        <span style="color: #ff0000; font-weight: bold;">&amp;</span> Log&#237;stica convidat    <span style="color: #ff0000; font-weight: bold;">&amp;</span> 40.50       <span style="color: #ff0000; font-weight: bold;">\\</span>
+Comunicaci&#243;         <span style="color: #ff0000; font-weight: bold;">&amp;</span> Imatge i redacci&#243;    <span style="color: #ff0000; font-weight: bold;">&amp;</span> 25.50       <span style="color: #ff0000; font-weight: bold;">\\</span>
+Protocol        <span style="color: #ff0000; font-weight: bold;">&amp;</span> Organitzci&#243; acte  <span style="color: #ff0000; font-weight: bold;">&amp;</span> 40.00       <span style="color: #ff0000; font-weight: bold;">\\</span>
+Merchandising       <span style="color: #ff0000; font-weight: bold;">&amp;</span> Material promocional <span style="color: #ff0000; font-weight: bold;">&amp;</span> 20.00       <span style="color: #ff0000; font-weight: bold;">\\</span>
+Cartell o vinil          <span style="color: #ff0000; font-weight: bold;">&amp;</span> Cartell de l'acte     <span style="color: #ff0000; font-weight: bold;">&amp;</span> 10.00        <span style="color: #ff0000; font-weight: bold;">\\</span> <span style="color: #696969;">\hline</span> <span style="color: #696969;">\hline</span>
+                <span style="color: #ff0000; font-weight: bold;">&amp;</span> TOTAL despeses originades:  <span style="color: #ff0000; font-weight: bold;">&amp;</span> 240.00        <span style="color: #ff0000; font-weight: bold;">\\</span> <span style="color: #696969;">\hline</span>
+                <span style="color: #ff0000; font-weight: bold;">&amp;</span> TOTAL d'ingressos necessaris <span style="color: #ff0000; font-weight: bold;">&amp;</span> 240.00        <span style="color: #ff0000; font-weight: bold;">\\</span> <span style="color: #696969;">\hline</span>
+<span style="color: #a020f0;">\end</span>{<span style="color: #0000ff;">tabular</span>}
+<span style="color: #a020f0;">\end</span>{<span style="color: #0000ff;">table</span>}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline21" class="outline-3">
+<h3 id="orgheadline21"><span class="section-number-3">1.13</span> graphics.tex El colofò gràfic d'imatges tipus polaroid</h3>
+<div class="outline-text-3" id="text-1-13">
+<p>
+Bona part de la complexitat per elaborar aquesta pàgina final, no prové
+i precisament, del document , sinó del procés de composició
+gràfica de les imatges, amb el paquet imagemagick.
+</p>
+
+<p>
+En LaTeX simplement s'insereix el .png resultant:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-latex"><span style="color: #a020f0;">\hspace</span>{<span style="color: #0000ff;">1.2cm</span>} <span style="color: #696969;">\includegraphics</span>[scale=.5]{montage.png}
+</pre>
+</div>
+
+<p>
+En efecte, inserim montage.png sense més dificultat al document
+&#x2026;
+</p>
+
+<p>
+Però certament hi han hagut reptes a resoldre per a que això fos
+possible, optant per la generació d'un arxiu .png en comptes d'un arxiu
+.jpg.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline22" class="outline-3">
+<h3 id="orgheadline22"><span class="section-number-3">1.14</span> Procediment d'obtenció d'imatges</h3>
+<div class="outline-text-3" id="text-1-14">
+<p>
+Dins el directori imatges, s'han previament situat les imatges
+candidates a inserir, en diferents formats, tamanys i proporcions.
+</p>
+
+<p>
+En aquest cas hi havien imatges:
+</p>
+
+<pre class="example">
+png
+jpg
+pdf
+</pre>
+</div>
+
+<div id="outline-container-orgheadline23" class="outline-4">
+<h4 id="orgheadline23"><span class="section-number-4">1.14.1</span> Conversió de PDF a PNG</h4>
+<div class="outline-text-4" id="text-1-14-1">
+<p>
+Per a les pdf, s'ha optat per convertir-les a .png amb
+</p>
+
+<pre class="example">
+$ convert -quality 300 latex_dissabte.pdf latex.png
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline24" class="outline-4">
+<h4 id="orgheadline24"><span class="section-number-4">1.14.2</span> Arxius resultants</h4>
+<div class="outline-text-4" id="text-1-14-2">
+<p>
+Obtenint imatges finals en .jpg i en .png tindrem els arxius a processar
+tot seguit.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline25" class="outline-4">
+<h4 id="orgheadline25"><span class="section-number-4">1.14.3</span> Conversió de les imatges .jpg i .png</h4>
+<div class="outline-text-4" id="text-1-14-3">
+<p>
+En diferents mides i proporcions, volem unificar aquests criteris i,
+convertir les imatges a un estil 'polaroid' molt fresc, que incorpora el
+marc característic en blanc, ondulacions, ombres i lleugeres rotacions.
+</p>
+
+<p>
+Per a fer aquesta conversió utilitzarem el programet polaroid.rb que és
+en realitat una proposta molt interessant en ruby, que converteix les
+tradicionals i llargues invocacions dels diferents comandaments del
+imagemagick, com ara el composite, en un nou comandament de consola,
+gràcies a la sucinta facilitat de ruby per aquests propòsits.
+</p>
+
+<p>
+A banda de tenir el imagemagick instal·lat, precissarem el paquet
+RMagick (Imagemagick per Ruby) que podrem instal·lar via:
+</p>
+
+<pre class="example">
+ruby-rmagick - ImageMagick API for Ruby
+
+$ apt-get install ruby-rmagick
+</pre>
+
+<p>
+Tot seguit podrem executar el programet en Ruby fent
+</p>
+
+<pre class="example">
+$ ruby polaroid.rb imatge/s.jpg
+</pre>
+
+<p>
+El qual generarà l'arxiu polaroid, amb un nou arxiu de sufixe -print,
+així:
+</p>
+
+<p>
+de: <code>map-ca-i-3000.png a: map-ca-i-3000-print.png</code>
+</p>
+
+<p>
+Es a dir, crearà un segon arxiu 'còpia' afegint el sufixe '-print' al
+nom de l'arxiu original, per diferenciar-lo.
+</p>
+
+<p>
+El codi font de l'arxiu polaroid.rb és:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-ruby"><span style="color: #483d8b;">require</span> <span style="color: #8b2252;">"RMagick"</span>
+
+<span style="color: #a020f0;">if</span> !<span style="color: #228b22;">ARGV</span>[0]
+    <span style="color: #483d8b;">puts</span> <span style="color: #8b2252;">"Usage: polaroid.rb path-to-image"</span>
+    <span style="color: #483d8b;">exit</span>
+<span style="color: #a020f0;">end</span>
+
+image = <span style="color: #228b22;">Magick</span>::<span style="color: #228b22;">Image</span>.read(<span style="color: #228b22;">ARGV</span>[0]).first
+
+image.border!(18, 18, <span style="color: #8b2252;">"#f0f0ff"</span>)
+
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Bend the image</span>
+image.background_color = <span style="color: #8b2252;">"none"</span>
+
+amplitude = image.columns * 0.01        <span style="color: #b22222;"># </span><span style="color: #b22222;">vary according to taste</span>
+wavelength = image.rows  * 2
+
+image.rotate!(90)
+image = image.wave(amplitude, wavelength)
+image.rotate!(-90)
+
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Make the shadow</span>
+shadow = image.flop
+shadow = shadow.colorize(1, 1, 1, <span style="color: #8b2252;">"gray75"</span>)     <span style="color: #b22222;"># </span><span style="color: #b22222;">shadow color can vary to taste</span>
+shadow.background_color = <span style="color: #8b2252;">"white"</span>       <span style="color: #b22222;"># </span><span style="color: #b22222;">was "none"</span>
+shadow.border!(10, 10, <span style="color: #8b2252;">"white"</span>)
+shadow = shadow.blur_image(0, 3)        <span style="color: #b22222;"># </span><span style="color: #b22222;">shadow blurriness can vary according to taste</span>
+
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Composite image over shadow. The y-axis adjustment can vary according to taste.</span>
+image = shadow.composite(image, -amplitude/2, 5, <span style="color: #228b22;">Magick</span>::<span style="color: #228b22;">OverCompositeOp</span>)
+
+image.rotate!(-5)                       <span style="color: #b22222;"># </span><span style="color: #b22222;">vary according to taste</span>
+image.trim!
+
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Add -print to image basename, write to file.</span>
+out = <span style="color: #228b22;">ARGV</span>[0].sub(<span style="color: #8b2252;">/\./</span>, <span style="color: #8b2252;">"-print."</span>)
+<span style="color: #483d8b;">puts</span> <span style="color: #8b2252;">"Writing </span><span style="color: #a0522d;">#{out}</span><span style="color: #8b2252;">"</span>
+image.write(out)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline26" class="outline-4">
+<h4 id="orgheadline26"><span class="section-number-4">1.14.4</span> Un cop hem generat aquests arxius polaroid&#x2026;</h4>
+<div class="outline-text-4" id="text-1-14-4">
+<p>
+Els desarem al directori polaroid, manllevant les imatges originals.
+</p>
+
+<p>
+Descartarem les imatges que malgrat les adaptacions fetes, siguin massa
+desproporcionades. Alhora, hauríem també de descartar tenir un nombre
+d'arxius polaroid igual a un nombre primer : 7,11,17, etc&#x2026; puig que no
+seran fàcils de composar en producte a x b.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline27" class="outline-3">
+<h3 id="orgheadline27"><span class="section-number-3">1.15</span> Generació d'un mosaic (<code>montage.png</code>)</h3>
+<div class="outline-text-3" id="text-1-15">
+<p>
+Un cop tinguem les imatges ja finalment seleccionades per a composar el
+mosaic que il·lustrarà la contraportada, les copiarem novament al
+directori copia.
+</p>
+
+<pre class="example">
+-rw-rw-r-- 1 user user 1800597 feb  4 20:06 Mapa-conceptual-del-programari-lliure-print.svg.png
+-rw-rw-r-- 1 user user  792961 feb  4 20:07 tw-print.png
+-rw-rw-r-- 1 user user  103008 feb  4 20:07 programari-lliure-8-728-print.jpg
+-rw-rw-r-- 1 user user   83179 feb  4 20:07 raon-programari-lliure-a-lescola-13-728-print.jpg
+-rw-rw-r-- 1 user user   61743 feb  4 20:07 thumb_474__4-print.jpg
+-rw-rw-r-- 1 user user  106756 feb  4 20:09 catplus-print.jpg
+-rw-rw-r-- 1 user user  373177 feb  4 20:10 latex-print.png
+-rw-rw-r-- 1 user user  134320 feb  4 20:30 nois.jpg
+-rwxrwxr-x 1 user user     298 feb  4 20:54 mosaic.sh
+-rw-rw-r-- 1 user user 1507090 feb  4 20:55 montage.png
+</pre>
+
+<p>
+Aqui disposarem d'un arxiu de Bash mosaic.sh
+</p>
+
+<pre class="example">
+montage catplus-print.jpg Mapa-conceptual-del-programari-lliure-print.svg.png latex-print.png nois.jpg programari-lliure-8-728-print.jpg raon-programari-lliure-a-lescola-13-728-print.jpg thumb_474__4-print.jpg tw-print.png -quality 300 -geometry 300 -sharpen 3 -tile 2x4 -geometry +0+0 montage.png
+</pre>
+
+<p>
+Aquest arxiu invoca el comandament montage d'imagemagick, amb l'ordre
+escollit.
+</p>
+
+<p>
+Com veiem utilitzem alguns modificadors (arguments) interessants a
+descriure:
+</p>
+
+<pre class="example">
+-quality 300    : Qualitat optima/orientativa
+-geometry 300   : Tamany preferit/optim
+-sharpen 3      : Redefinició sharpen en grau 3 (sovint les adaptacions queden borroses)
+-tile 2x4       : La geometria del mosaic, dues files per quatre columnes (màxim!)
+-geometry +0+0  : La separació mínima entre imatges del mosaic (per condensar)
+</pre>
+
+<p>
+Com veiem, es generarà un arxiu montage.png amb el mosaic de polaroids.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline28" class="outline-3">
+<h3 id="orgheadline28"><span class="section-number-3">1.16</span> Consideracions al pes de l'arxiu montage.png</h3>
+<div class="outline-text-3" id="text-1-16">
+<p>
+Si no reduïm el pes del .png l'arxiu resultant en LaTeX graphics.pdf
+tindrà un pes massa elevat si el volem enviar per correu.
+</p>
+</div>
+
+<div id="outline-container-orgheadline29" class="outline-4">
+<h4 id="orgheadline29"><span class="section-number-4">1.16.1</span> L'eina d'optimització de png's pngquant</h4>
+<div class="outline-text-4" id="text-1-16-1">
+<p>
+Podem aconseguir reduccions molt significatives (proposem un 71% de
+qualitat)
+</p>
+
+<p>
+La podem instal·lar via:
+</p>
+
+<pre class="example">
+$ sudo apt-get install pngquant
+</pre>
+
+<p>
+I utilitzar amb:
+</p>
+
+<pre class="example">
+$ pngquant --quality=71 montage.png
+$ ls -ltr
+</pre>
+
+<p>
+I comprobarem els nous pesos i reduccions, comparant el nou arxiu
+generat :
+</p>
+
+<pre class="example">
+montage-fs8.png
+</pre>
+
+<p>
+Notem que pngquant afegeix el sufixe -fs8
+</p>
+
+<p>
+Podem tanmateix verificar visualment la qualitat:
+</p>
+
+<pre class="example">
+display montage-fs8.png
+</pre>
+
+<p>
+I eliminar el vell;
+</p>
+
+<pre class="example">
+$ mv montage-fs8.png montage.png
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline30" class="outline-4">
+<h4 id="orgheadline30"><span class="section-number-4">1.16.2</span> Com funciona;</h4>
+<div class="outline-text-4" id="text-1-16-2">
+<p>
+pngquant uses modified version of Median Cut quantization algorithm and
+additional techniques to mitigate deficiencies of Median Cut.
+</p>
+
+<p>
+Instead of splitting boxes with largest volume or number of colors,
+boxes are selected to minimize variance from their median value.
+</p>
+
+<p>
+Histogram is built with addition of a basic perception model, which
+gives less weight to noisy areas of the image.
+</p>
+
+<p>
+To improve color further, histogram is adjusted in a process similar to
+gradient descent (Median Cut is repeated many times with more weight on
+poorly represented colors).
+</p>
+
+<p>
+Finally, colors are corrected using Voronoi iteration (K-means), which
+guarantees locally optimal palette.
+</p>
+
+<p>
+pngquant works in premultiplied alpha color space to give less weight to
+transparent colors.
+</p>
+
+<p>
+When remapping, error diffusion is applied only to areas where several
+neighboring pixels quantize to the same value, and which are not edges.
+This avoids adding noise to areas which have high visual quality without
+dithering.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline31" class="outline-3">
+<h3 id="orgheadline31"><span class="section-number-3">1.17</span> Re-generació de la contraportada a baix pes</h3>
+<div class="outline-text-3" id="text-1-17">
+<p>
+Obtingut el nou montage.png amb una significativa reducció de pes, cal
+recompilar (pdflatex) el graphics.tex amb el nou arxiu.
+</p>
+
+<p>
+Com que hem fet el mv, no cal editar el graphics.tex, puig que el
+montage.png continua rebent el mateix nom.
+</p>
+
+<pre class="example">
+$ pdflatex graphics.tex
+</pre>
+
+<p>
+Observem ara, que el nou graphics.pdf generat ja pesa en relació
+aproximada a l'estalvi procurat al .png incrustat.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline32" class="outline-3">
+<h3 id="orgheadline32"><span class="section-number-3">1.18</span> Compilació final dels quatre arxius + 1, resultants;</h3>
+<div class="outline-text-3" id="text-1-18">
+<p>
+Els 4 documents que junts, conformaran el DOSSIER+ son:
+</p>
+
+<pre class="example">
+portada.tex
+quisom.tex
+proposta.tex
+graphics.tex
+</pre>
+
+<p>
+Un cop els hem obtingut, ens situem al directori CATPLUS/DOSSIER
+</p>
+
+<pre class="example">
+portada.pdf
+quisom.pdf
+proposta.pdf
+graphics.pdf
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline33" class="outline-3">
+<h3 id="orgheadline33"><span class="section-number-3">1.19</span> Creació de shell scripts per al directori DOSSIER</h3>
+<div class="outline-text-3" id="text-1-19">
+<p>
+Els arxius a dalt llistats, resultaran en dos PDF's compilats;
+</p>
+</div>
+
+<div id="outline-container-orgheadline34" class="outline-4">
+<h4 id="orgheadline34"><span class="section-number-4">1.19.1</span> DOSSIER+A3.pdf</h4>
+<div class="outline-text-4" id="text-1-19-1">
+<p>
+Dossier A3 LANDSCAPE amb ordre 4,1,2,3 per impressió en copisteria
+digital Repte: Aconseguir un A3 degudament ordenat (#4,1,2,3), apaisat,
+en tamany final A3 i molt important; Respectant els marges originals del
+A4, al A3 final.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline35" class="outline-4">
+<h4 id="orgheadline35"><span class="section-number-4">1.19.2</span> DOSSIER+.pdf</h4>
+<div class="outline-text-4" id="text-1-19-2">
+<p>
+Dossier A4 de 4 pàgines per ENVIAR ADJUNT en correu electrònic o per
+descarregar Repte: Aconseguir un A3 de baix pes en Kb, via millor
+compressió de les imatges .png
+</p>
+
+<p>
+Per a fer-ho possible de forma automatizada, dissenyarem dos shell
+scripts:
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline36" class="outline-4">
+<h4 id="orgheadline36"><span class="section-number-4">1.19.3</span> dossier.sh per generar PDF per ENVIAMENT PER CORREU</h4>
+<div class="outline-text-4" id="text-1-19-3">
+<pre class="example">
+$ cat dossier.sh
+</pre>
+
+<p>
+ens mostra:
+</p>
+
+<pre class="example">
+pdftk portada.pdf quisom.pdf proposta.pdf graphics.pdf cat output DOSSIER+.pdf compress
+</pre>
+
+<p>
+Amb ordre normal, i tamany A4, generarà DOSSIER+.pdf per enviament per
+correu.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline37" class="outline-4">
+<h4 id="orgheadline37"><span class="section-number-4">1.19.4</span> copisteria.sh per generar PDF per IMPRESSIÓ EN COPISTERIA</h4>
+<div class="outline-text-4" id="text-1-19-4">
+<pre class="example">
+$ cat copisteria.sh
+</pre>
+
+<p>
+ens mostra:
+</p>
+
+<pre class="example">
+pdftk graphics.pdf portada.pdf quisom.pdf proposta.pdf cat output dossier_imprimir.pdf
+</pre>
+
+<p>
+Resultant en l'arxiu dossier\<sub>imprimir.pdf</sub>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline38" class="outline-3">
+<h3 id="orgheadline38"><span class="section-number-3">1.20</span> Generació final de l'arxiu DOSSIER+A3.pdf per copisteria</h3>
+<div class="outline-text-3" id="text-1-20">
+<p>
+L'arxiu anterior per copisteria dossier\<sub>imprimir.pdf</sub> encara no és
+tanmateix, prou útil per a copisteria. Les pàgines tenen l'ordre
+correcte, però la mida i els màrgens no son adequats, doncs no es pot
+passar d'A4 a A3 apaïsat, tant a la lleugera. Els marges verticals
+queden totalment desproporcionats.
+</p>
+</div>
+
+<div id="outline-container-orgheadline39" class="outline-4">
+<h4 id="orgheadline39"><span class="section-number-4">1.20.1</span> muntatge.sh: Shell script final per DOSSIER+A3.pdf</h4>
+<div class="outline-text-4" id="text-1-20-1">
+<p>
+Volem finalment; Dossier A3 LANDSCAPE amb ordre 4,1,2,3 per impressió en
+copisteria digital
+</p>
+
+<p>
+I tenim dossier\<sub>imprimir.pdf</sub>
+</p>
+
+<p>
+Per tant,
+</p>
+
+<p>
+Ens caldrà un nou script muntatge.sh
+</p>
+
+<pre class="example">
+$ cat muntatge.sh
+pdfnup dossier_imprimir.pdf --nup 2x1 --a3paper --landscape --outfile DOSSIER+A3.pdf
+</pre>
+
+<p>
+Que mitjançant el comandament pdfnup, convertirem les 4 pàgines en A4 de
+l'arxiu dossier\<sub>imprimir.pdf</sub> a un arxiu DEFINITIU DOSSIER+A3.pdf, en
+format A3 apaisat, 2x1.
+</p>
+
+<pre class="example">
+$ evince DOSSIER+A3.pdf
+</pre>
+
+<p>
+Si anem a l'opció propietats del evince, podrem verificar que tenim un
+A3 verificat.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline40" class="outline-4">
+<h4 id="orgheadline40"><span class="section-number-4">1.20.2</span> Continguts finals de la carpeta DOSSIER a copiar a USB o enviar:</h4>
+<div class="outline-text-4" id="text-1-20-2">
+<pre class="example">
+-rw-rw-r-- 1 user user  86471 feb  4 14:24 portada.pdf
+-rw-rw-r-- 1 user user 121451 feb  4 14:37 quisom.pdf
+-rw-rw-r-- 1 user user 137567 feb  4 15:18 proposta.pdf
+-rwxrwxr-x 1 user user     87 feb  4 21:57 copisteria.sh
+-rwxrwxr-x 1 user user     88 feb  4 22:00 dossier.sh
+-rw-rw-r-- 1 user user 282905 feb  4 22:05 graphics.pdf
+-rw-rw-r-- 1 user user 650467 feb  4 22:05 dossier_imprimir.pdf
+-rw-rw-r-- 1 user user 653695 feb  4 22:05 DOSSIER+.pdf
+-rw-rw-r-- 1 user user 426441 feb  4 22:13 DOSSIER+A3.pdf
+-rw-rw-r-- 1 user user     85 feb  4 22:14 muntatge.sh
+-rw-rw-r-- 1 user user  18299 feb  4 23:51 historia.dat
+</pre>
+
+<p>
+Com podem veure, l'arxiu historia.dat és justament el present arxiu.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline41" class="outline-3">
+<h3 id="orgheadline41"><span class="section-number-3">1.21</span> Impressió digital del DOSSIER+A3.pdf</h3>
+<div class="outline-text-3" id="text-1-21">
+<p>
+A la copisteria digital ens podran imprimir aquest arxiu DOSSIER+A3.pdf
+</p>
+
+<p>
+Una possibilitat econòmica es fer les cobertes en color (pàg 1,2 -abans
+4,1-) I les dues pàgines interiors en B/N (pàg 3,4 -abans 2,3-)
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline42" class="outline-3">
+<h3 id="orgheadline42"><span class="section-number-3">1.22</span> Us i finalitats</h3>
+<div class="outline-text-3" id="text-1-22">
+<p>
+S'imprimiran només DOSSIER+A3.pdf a copisteria, per a reunions
+concertades, disposant tanmateix tots els membres de la junta directiva
+d'una còpia a punt per a possibles reunions improvisades amb
+ajuntaments.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline43" class="outline-3">
+<h3 id="orgheadline43"><span class="section-number-3">1.23</span> Model de carta d'enviament</h3>
+<div class="outline-text-3" id="text-1-23">
+<p>
+Benvolguts,
+</p>
+
+<p>
+El passat 12 de novembre del 2015, la nostre entitat Associació pel programari lliure de Catalunya, CATPLUS, era oficialment inscrita al registre
+d'entitats de la Generalitat, amb els estatuts aprovats i publicats.
+Poques setmanes després, vam celebrar la primera junta ordinària, posant
+en funcionament la maquinària de l'associació, amb l'objectiu d'assolir
+les fites proposades; «Article 2. Els fins de l'associació són: Promoure
+l'ús i difusió de programari lliure, en qualsevol de les seves
+plataformes.» I per fer-ho possible, l'associació cat+ es proposa
+realitzar les activitats següents (art.2 cont.): Divulgació; Realització
+de jornades, xerrades i tallers i, Formació; Realització de cursets,
+material didàctic i convenis formatius.
+</p>
+
+<p>
+En aquestes darreres setmanes , hem posat en funcionament les
+eines que ho faran possible; La nostre pàgina web www.catplus.cat, el
+nostre correu info@catplus.cat, els comptes de www.twitter.com/acatplus,
+Facebook, Google+, la redacció de les primeres propostes d'activitats,
+l'establiment de les primeres rondes de conversacions&#x2026;
+</p>
+
+<p>
+Tot plegat ens ha de permetre treballar per la divulgació del programari
+lliure i dels valors que ens aporta de llibertat, equitat i lluita
+contra la fractura social i digital. Estem parlant d'innovació oberta,
+de TIC's pensades també per a la integració social i l'assoliment
+d'oportunitats per a persones, entitats, empreses i administracions. A
+Europa el programari lliure ja és gairebé una qüestió d'ètica en moltes
+administracions.
+</p>
+
+<p>
+Allò que en pot resultar va molt més enllà de resultats i objectius, que
+hi son i molts; És al capdavall «divertir-nos amb la intel·ligència» el
+que com deia Richard Stallman (pare del programari lliure) ens fa
+aprendre pel plaer de fer-ho.
+</p>
+
+<p>
+Junta de l'Associació cat+
+</p>
+
+<pre class="example">
+#####################################################
+Associació catalana pel programari lliure CATPLUS
+Inscrita al reg. d'ass. #57338-J/2 amb NIF G-55250740
+info@catplus.cat · www.catplus.cat · ssh.catplus.cat
+#####################################################
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Autor: Secció de de l'Assoc. cat+</p>
+<p class="date">Created: 2016-02-09 dt 00:01</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
